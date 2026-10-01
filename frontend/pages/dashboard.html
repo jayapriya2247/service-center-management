@@ -1,0 +1,1211 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - ServiceCenter</title>
+
+    <link rel="stylesheet"
+          href="../css/style.css">
+
+</head>
+
+
+<body class="dashboard-page">
+
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            Service<span>Center</span>
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <a href="dashboard.html"
+               class="active">
+                <span>📊</span>
+                Dashboard
+            </a>
+
+            <a href="customers.html">
+                <span>👥</span>
+                Customers
+            </a>
+
+            <a href="technicians.html">
+                <span>🧑‍🔧</span>
+                Technicians
+            </a>
+
+            <a href="service-requests.html">
+                <span>🔧</span>
+                Service Requests
+            </a>
+
+            <a href="billing.html">
+                <span>💳</span>
+                Billing
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button
+                id="logoutButton"
+                class="logout-button">
+
+                🚪 Logout
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="dashboard-main">
+
+
+        <!-- TOP HEADER -->
+
+        <header class="dashboard-header">
+
+            <div>
+
+                <p class="dashboard-label">
+                    SERVICE CENTER
+                </p>
+
+                <h1>
+                    Dashboard
+                </h1>
+
+            </div>
+
+
+            <div class="user-info">
+
+                <div class="user-avatar">
+                    👤
+                </div>
+
+                <div>
+
+                    <strong id="userName">
+                        User
+                    </strong>
+
+                    <span id="userRole">
+                        Customer
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =========================
+             WELCOME BANNER
+        ========================== -->
+
+        <section class="welcome-banner">
+
+            <div>
+
+                <p class="welcome-small">
+                    Welcome back
+                </p>
+
+                <h2 id="welcomeName">
+                    User
+                </h2>
+
+                <p>
+                    Manage your service center operations
+                    from one place.
+                </p>
+
+            </div>
+
+
+            <div class="welcome-icon">
+                🔧
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             STATISTICS
+        ========================== -->
+
+        <section class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon customer-icon">
+                    👥
+                </div>
+
+                <div>
+
+                    <p>
+                        Total Customers
+                    </p>
+
+                    <h2 id="customerCount">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon technician-icon">
+                    🧑‍🔧
+                </div>
+
+                <div>
+
+                    <p>
+                        Technicians
+                    </p>
+
+                    <h2 id="technicianCount">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon service-icon-card">
+                    🔧
+                </div>
+
+                <div>
+
+                    <p>
+                        Service Requests
+                    </p>
+
+                    <h2 id="serviceCount">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon billing-icon">
+                    💳
+                </div>
+
+                <div>
+
+                    <p>
+                        Total Bills
+                    </p>
+
+                    <h2 id="billingCount">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             SERVICE STATUS
+        ========================== -->
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p>
+                        SERVICE MONITORING
+                    </p>
+
+                    <h2>
+                        Service Status Overview
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="service-status-grid">
+
+
+                <div class="status-card pending-status">
+
+                    <div class="status-card-icon">
+                        🟡
+                    </div>
+
+                    <div>
+
+                        <p>
+                            Pending
+                        </p>
+
+                        <h3 id="pendingCount">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="status-card assigned-status">
+
+                    <div class="status-card-icon">
+                        🔵
+                    </div>
+
+                    <div>
+
+                        <p>
+                            Assigned
+                        </p>
+
+                        <h3 id="assignedCount">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="status-card progress-status">
+
+                    <div class="status-card-icon">
+                        🟠
+                    </div>
+
+                    <div>
+
+                        <p>
+                            In Progress
+                        </p>
+
+                        <h3 id="inProgressCount">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="status-card completed-status">
+
+                    <div class="status-card-icon">
+                        🟢
+                    </div>
+
+                    <div>
+
+                        <p>
+                            Completed
+                        </p>
+
+                        <h3 id="completedCount">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="status-card cancelled-status">
+
+                    <div class="status-card-icon">
+                        🔴
+                    </div>
+
+                    <div>
+
+                        <p>
+                            Cancelled
+                        </p>
+
+                        <h3 id="cancelledCount">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             QUICK ACTIONS
+        ========================== -->
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p>
+                        MANAGEMENT
+                    </p>
+
+                    <h2>
+                        Quick Actions
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+
+                <a href="customers.html"
+                   class="quick-card">
+
+                    <div class="quick-icon">
+                        👥
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Customers
+                        </h3>
+
+                        <p>
+                            Manage customer records
+                        </p>
+
+                    </div>
+
+                    <span>
+                        →
+                    </span>
+
+                </a>
+
+
+
+                <a href="technicians.html"
+                   class="quick-card">
+
+                    <div class="quick-icon">
+                        🧑‍🔧
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Technicians
+                        </h3>
+
+                        <p>
+                            Manage technicians
+                        </p>
+
+                    </div>
+
+                    <span>
+                        →
+                    </span>
+
+                </a>
+
+
+
+                <a href="service-requests.html"
+                   class="quick-card">
+
+                    <div class="quick-icon">
+                        🔧
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Service Requests
+                        </h3>
+
+                        <p>
+                            Track service requests
+                        </p>
+
+                    </div>
+
+                    <span>
+                        →
+                    </span>
+
+                </a>
+
+
+
+                <a href="billing.html"
+                   class="quick-card">
+
+                    <div class="quick-icon">
+                        💳
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Billing
+                        </h3>
+
+                        <p>
+                            Manage invoices and payments
+                        </p>
+
+                    </div>
+
+                    <span>
+                        →
+                    </span>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             RECENT SERVICE REQUESTS
+        ========================== -->
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p>
+                        RECENT ACTIVITY
+                    </p>
+
+                    <h2>
+                        Recent Service Requests
+                    </h2>
+
+                </div>
+
+
+                <a href="service-requests.html"
+                   class="dashboard-view-link">
+
+                    View All →
+
+                </a>
+
+            </div>
+
+
+            <div class="recent-service-table">
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Customer
+                                </th>
+
+                                <th>
+                                    Vehicle
+                                </th>
+
+                                <th>
+                                    Service
+                                </th>
+
+                                <th>
+                                    Technician
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Date
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="recentServiceBody">
+
+                            <tr>
+
+                                <td colspan="6"
+                                    class="empty-table">
+
+                                    Loading service requests...
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             MANAGEMENT OVERVIEW
+        ========================== -->
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p>
+                        SYSTEM
+                    </p>
+
+                    <h2>
+                        Management Overview
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="overview-grid">
+
+
+                <div class="overview-card">
+
+                    <div class="overview-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Customer Management
+                    </h3>
+
+                    <p>
+                        Store and manage customer details,
+                        contact information and vehicle records.
+                    </p>
+
+                </div>
+
+
+
+                <div class="overview-card">
+
+                    <div class="overview-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Service Tracking
+                    </h3>
+
+                    <p>
+                        Monitor service requests and track
+                        their progress from start to completion.
+                    </p>
+
+                </div>
+
+
+
+                <div class="overview-card">
+
+                    <div class="overview-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Technician Assignment
+                    </h3>
+
+                    <p>
+                        Assign technicians based on their
+                        specialization and availability.
+                    </p>
+
+                </div>
+
+
+
+                <div class="overview-card">
+
+                    <div class="overview-number">
+                        04
+                    </div>
+
+                    <h3>
+                        Billing & Payments
+                    </h3>
+
+                    <p>
+                        Generate bills and manage payment
+                        status and payment methods.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================
+         DASHBOARD JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+
+        // ==========================================
+        // AUTHENTICATION CHECK
+        // ==========================================
+
+        const token =
+            localStorage.getItem("token");
+
+
+        if (!token) {
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+
+        // ==========================================
+        // DISPLAY USER INFORMATION
+        // ==========================================
+
+        const storedUser =
+            localStorage.getItem("user");
+
+
+        if (storedUser) {
+
+            try {
+
+                const user =
+                    JSON.parse(storedUser);
+
+
+                document.getElementById(
+                    "userName"
+                ).textContent =
+                    user.name || "User";
+
+
+                document.getElementById(
+                    "userRole"
+                ).textContent =
+                    user.role || "Customer";
+
+
+                document.getElementById(
+                    "welcomeName"
+                ).textContent =
+                    user.name || "User";
+
+            } catch (error) {
+
+                console.error(
+                    "User data error:",
+                    error
+                );
+
+            }
+
+        }
+
+
+
+        // ==========================================
+        // API HELPER
+        // ==========================================
+
+        async function fetchAPI(url) {
+
+            const response =
+                await fetch(url, {
+
+                    method: "GET",
+
+                    headers: {
+
+                        "Authorization":
+                            "Bearer " + token,
+
+                        "Content-Type":
+                            "application/json"
+
+                    }
+
+                });
+
+
+            if (response.status === 401) {
+
+                localStorage.removeItem(
+                    "token"
+                );
+
+                localStorage.removeItem(
+                    "user"
+                );
+
+                window.location.href =
+                    "login.html";
+
+                return null;
+
+            }
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "API request failed: " +
+                    response.status
+                );
+
+            }
+
+
+            return response.json();
+
+        }
+
+
+
+        // ==========================================
+        // LOAD DASHBOARD
+        // ==========================================
+
+        async function loadDashboard() {
+
+            try {
+
+                console.log(
+                    "Loading dashboard data..."
+                );
+
+
+                // ==================================
+                // GET DATA FROM BACKEND
+                // ==================================
+
+                const customers =
+                    await fetchAPI(
+                        "http://localhost:5000/api/customers"
+                    );
+
+
+                const technicians =
+                    await fetchAPI(
+                        "http://localhost:5000/api/technicians"
+                    );
+
+
+                const services =
+                    await fetchAPI(
+                        "http://localhost:5000/api/service-requests"
+                    );
+
+
+                const billing =
+                    await fetchAPI(
+                        "http://localhost:5000/api/billing"
+                    );
+
+
+
+                // ==================================
+                // UPDATE MAIN COUNTS
+                // ==================================
+
+                if (customers) {
+
+                    document.getElementById(
+                        "customerCount"
+                    ).textContent =
+                        customers.count || 0;
+
+                }
+
+
+                if (technicians) {
+
+                    document.getElementById(
+                        "technicianCount"
+                    ).textContent =
+                        technicians.count || 0;
+
+                }
+
+
+                if (services) {
+
+                    document.getElementById(
+                        "serviceCount"
+                    ).textContent =
+                        services.count || 0;
+
+                }
+
+
+                if (billing) {
+
+                    document.getElementById(
+                        "billingCount"
+                    ).textContent =
+                        billing.count || 0;
+
+                }
+
+
+
+                // ==================================
+                // SERVICE STATUS COUNTS
+                // ==================================
+
+                if (
+                    services &&
+                    services.serviceRequests
+                ) {
+
+                    const serviceRequests =
+                        services.serviceRequests;
+
+
+                    const pending =
+                        serviceRequests.filter(
+                            service =>
+                                service.status === "Pending"
+                        ).length;
+
+
+                    const assigned =
+                        serviceRequests.filter(
+                            service =>
+                                service.status === "Assigned"
+                        ).length;
+
+
+                    const inProgress =
+                        serviceRequests.filter(
+                            service =>
+                                service.status === "In Progress"
+                        ).length;
+
+
+                    const completed =
+                        serviceRequests.filter(
+                            service =>
+                                service.status === "Completed"
+                        ).length;
+
+
+                    const cancelled =
+                        serviceRequests.filter(
+                            service =>
+                                service.status === "Cancelled"
+                        ).length;
+
+
+                    document.getElementById(
+                        "pendingCount"
+                    ).textContent =
+                        pending;
+
+
+                    document.getElementById(
+                        "assignedCount"
+                    ).textContent =
+                        assigned;
+
+
+                    document.getElementById(
+                        "inProgressCount"
+                    ).textContent =
+                        inProgress;
+
+
+                    document.getElementById(
+                        "completedCount"
+                    ).textContent =
+                        completed;
+
+
+                    document.getElementById(
+                        "cancelledCount"
+                    ).textContent =
+                        cancelled;
+
+
+
+                    // ==================================
+                    // RECENT SERVICE REQUESTS
+                    // ==================================
+
+                    const recentRequests =
+                        serviceRequests.slice(0, 5);
+
+
+                    const recentServiceBody =
+                        document.getElementById(
+                            "recentServiceBody"
+                        );
+
+
+                    if (
+                        recentRequests.length === 0
+                    ) {
+
+                        recentServiceBody.innerHTML = `
+
+                            <tr>
+
+                                <td colspan="6"
+                                    class="empty-table">
+
+                                    No service requests found.
+
+                                </td>
+
+                            </tr>
+
+                        `;
+
+                    } else {
+
+                        recentServiceBody.innerHTML =
+                            recentRequests.map(
+                                service => {
+
+                                    const customerName =
+                                        service.customer?.name ||
+                                        "Unknown";
+
+
+                                    const technicianName =
+                                        service.technician?.name ||
+                                        "Not Assigned";
+
+
+                                    const serviceDate =
+                                        service.serviceDate
+                                            ? new Date(
+                                                service.serviceDate
+                                              ).toLocaleDateString(
+                                                "en-IN"
+                                              )
+                                            : "-";
+
+
+                                    return `
+
+                                        <tr>
+
+                                            <td>
+
+                                                <strong>
+                                                    ${customerName}
+                                                </strong>
+
+                                            </td>
+
+
+                                            <td>
+                                                ${service.vehicleNumber}
+                                            </td>
+
+
+                                            <td>
+                                                ${service.serviceType}
+                                            </td>
+
+
+                                            <td>
+                                                ${technicianName}
+                                            </td>
+
+
+                                            <td>
+
+                                                <span
+                                                    class="dashboard-status-badge">
+
+                                                    ${service.status}
+
+                                                </span>
+
+                                            </td>
+
+
+                                            <td>
+                                                ${serviceDate}
+                                            </td>
+
+                                        </tr>
+
+                                    `;
+
+                                }
+                            ).join("");
+
+                    }
+
+                }
+
+
+
+                console.log(
+                    "Dashboard data loaded successfully"
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Dashboard Error:",
+                    error
+                );
+
+            }
+
+        }
+
+
+
+        // ==========================================
+        // LOGOUT
+        // ==========================================
+
+        document.getElementById(
+            "logoutButton"
+        ).addEventListener(
+            "click",
+            function () {
+
+                localStorage.removeItem(
+                    "token"
+                );
+
+                localStorage.removeItem(
+                    "user"
+                );
+
+
+                window.location.href =
+                    "login.html";
+
+            }
+        );
+
+
+
+        // ==========================================
+        // START DASHBOARD
+        // ==========================================
+
+        loadDashboard();
+
+    </script>
+
+
+</body>
+
+</html>
+```

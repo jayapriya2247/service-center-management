@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Service Requests - Service Center Management
+    </title>
+
+    <link rel="stylesheet"
+        href="../css/style.css">
+
+</head>
+
+
+<body class="dashboard-page">
+
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            Service<span>Center</span>
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <a href="dashboard.html">
+                <span>🏠</span>
+                Dashboard
+            </a>
+
+            <a href="customers.html">
+                <span>👥</span>
+                Customers
+            </a>
+
+            <a href="technicians.html">
+                <span>🔧</span>
+                Technicians
+            </a>
+
+            <a href="service-requests.html"
+               class="active">
+                <span>📋</span>
+                Service Requests
+            </a>
+
+            <a href="billing.html">
+                <span>💳</span>
+                Billing
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button
+                class="logout-button"
+                onclick="logout()">
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="dashboard-main">
+
+
+        <!-- HEADER -->
+
+        <header class="dashboard-header">
+
+            <div>
+
+                <p class="dashboard-label">
+                    SERVICE CENTER MANAGEMENT
+                </p>
+
+                <h1>
+                    Service Requests
+                </h1>
+
+            </div>
+
+
+            <div class="user-info">
+
+                <div class="user-avatar">
+                    👤
+                </div>
+
+                <div>
+
+                    <strong id="userName">
+                        User
+                    </strong>
+
+                    <span id="userRole">
+                        Customer
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =========================
+             PAGE INTRO
+        ========================== -->
+
+        <section class="page-intro">
+
+            <div>
+
+                <p class="dashboard-label">
+                    SERVICE REQUEST MANAGEMENT
+                </p>
+
+                <h2>
+                    Manage Service Requests
+                </h2>
+
+                <p>
+                    Create, assign and track vehicle service requests.
+                </p>
+
+            </div>
+
+
+            <button
+                class="primary-action-button"
+                onclick="openServiceForm()">
+
+                + New Service Request
+
+            </button>
+
+        </section>
+
+
+        <!-- MESSAGE -->
+
+        <div
+            id="pageMessage"
+            class="page-message">
+        </div>
+
+
+
+        <!-- =========================
+             SERVICE REQUEST FORM
+        ========================== -->
+
+        <section
+            id="serviceFormSection"
+            class="data-form-section hidden">
+
+
+            <div class="form-section-header">
+
+                <div>
+
+                    <h2 id="formTitle">
+                        New Service Request
+                    </h2>
+
+                    <p>
+                        Enter the vehicle service details below.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="close-button"
+                    onclick="closeServiceForm()">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+
+            <form id="serviceForm">
+
+
+                <div class="form-grid">
+
+
+                    <!-- CUSTOMER -->
+
+                    <div class="form-group">
+
+                        <label for="customerSelect">
+                            Customer
+                        </label>
+
+                        <select
+                            id="customerSelect"
+                            required>
+
+                            <option value="">
+                                Select Customer
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- VEHICLE NUMBER -->
+
+                    <div class="form-group">
+
+                        <label for="vehicleNumber">
+                            Vehicle Number
+                        </label>
+
+                        <input
+                            type="text"
+                            id="vehicleNumber"
+                            placeholder="Example: TN37CD5678"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- SERVICE TYPE -->
+
+                    <div class="form-group">
+
+                        <label for="serviceType">
+                            Service Type
+                        </label>
+
+                        <select
+                            id="serviceType"
+                            required>
+
+                            <option value="">
+                                Select Service Type
+                            </option>
+
+                            <option value="General Service">
+                                General Service
+                            </option>
+
+                            <option value="Full Vehicle Service">
+                                Full Vehicle Service
+                            </option>
+
+                            <option value="Engine Repair">
+                                Engine Repair
+                            </option>
+
+                            <option value="Oil Change">
+                                Oil Change
+                            </option>
+
+                            <option value="Brake Service">
+                                Brake Service
+                            </option>
+
+                            <option value="AC Service">
+                                AC Service
+                            </option>
+
+                            <option value="Electrical Repair">
+                                Electrical Repair
+                            </option>
+
+                            <option value="Tyre Service">
+                                Tyre Service
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- PRIORITY -->
+
+                    <div class="form-group">
+
+                        <label for="priority">
+                            Priority
+                        </label>
+
+                        <select
+                            id="priority">
+
+                            <option value="Low">
+                                Low
+                            </option>
+
+                            <option value="Medium"
+                                    selected>
+                                Medium
+                            </option>
+
+                            <option value="High">
+                                High
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- TECHNICIAN -->
+
+                    <div class="form-group">
+
+                        <label for="technicianSelect">
+                            Assign Technician
+                        </label>
+
+                        <select
+                            id="technicianSelect">
+
+                            <option value="">
+                                Not Assigned
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- STATUS -->
+
+                    <div class="form-group">
+
+                        <label for="serviceStatus">
+                            Status
+                        </label>
+
+                        <select
+                            id="serviceStatus">
+
+                            <option value="Pending">
+                                Pending
+                            </option>
+
+                            <option value="Assigned">
+                                Assigned
+                            </option>
+
+                            <option value="In Progress">
+                                In Progress
+                            </option>
+
+                            <option value="Completed">
+                                Completed
+                            </option>
+
+                            <option value="Cancelled">
+                                Cancelled
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- SERVICE DATE -->
+
+                    <div class="form-group">
+
+                        <label for="serviceDate">
+                            Service Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="serviceDate"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- ESTIMATED COST -->
+
+                    <div class="form-group">
+
+                        <label for="estimatedCost">
+                            Estimated Cost (₹)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="estimatedCost"
+                            min="0"
+                            step="0.01"
+                            value="0"
+                            placeholder="Enter estimated cost">
+
+                    </div>
+
+
+
+                    <!-- PROBLEM DESCRIPTION -->
+
+                    <div class="form-group">
+
+                        <label for="problemDescription">
+                            Problem Description
+                        </label>
+
+                        <textarea
+                            id="problemDescription"
+                            rows="4"
+                            placeholder="Describe the vehicle problem"
+                            required></textarea>
+
+                    </div>
+
+
+
+                    <!-- NOTES -->
+
+                    <div class="form-group">
+
+                        <label for="notes">
+                            Additional Notes
+                        </label>
+
+                        <textarea
+                            id="notes"
+                            rows="3"
+                            placeholder="Enter additional notes"></textarea>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- FORM BUTTONS -->
+
+                <div class="form-actions">
+
+                    <button
+                        type="submit"
+                        class="auth-button">
+
+                        Save Service Request
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="secondary-action-button"
+                        onclick="closeServiceForm()">
+
+                        Cancel
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+
+
+        <!-- =========================
+             SERVICE REQUEST TABLE
+        ========================== -->
+
+        <section class="table-section">
+
+
+            <div class="table-header">
+
+                <div>
+
+                    <h2>
+                        Service Request List
+                    </h2>
+
+                    <p>
+                        View and manage all vehicle service requests.
+                    </p>
+
+                </div>
+
+
+                <input
+                    type="text"
+                    id="searchService"
+                    class="search-input"
+                    placeholder="Search service request...">
+
+            </div>
+
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Customer
+                            </th>
+
+                            <th>
+                                Vehicle
+                            </th>
+
+                            <th>
+                                Service
+                            </th>
+
+                            <th>
+                                Priority
+                            </th>
+
+                            <th>
+                                Technician
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Cost
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="serviceTableBody">
+
+                        <tr>
+
+                            <td
+                                colspan="9"
+                                class="empty-table">
+
+                                Loading service requests...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+
+        const API_URL =
+            "http://localhost:5000/api/service-requests";
+
+        const CUSTOMER_API =
+            "http://localhost:5000/api/customers";
+
+        const TECHNICIAN_API =
+            "http://localhost:5000/api/technicians";
+
+
+        let serviceRequests = [];
+
+        let customers = [];
+
+        let technicians = [];
+
+        let editingServiceId = null;
+
+
+        /* =========================
+           AUTH CHECK
+        ========================== */
+
+        const token =
+            localStorage.getItem("token");
+
+
+        if (!token) {
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+
+        /* =========================
+           USER INFORMATION
+        ========================== */
+
+        const storedUser =
+            localStorage.getItem("user");
+
+
+        if (storedUser) {
+
+            const user =
+                JSON.parse(storedUser);
+
+
+            document
+                .getElementById("userName")
+                .textContent =
+                user.name || "User";
+
+
+            document
+                .getElementById("userRole")
+                .textContent =
+                user.role || "Customer";
+
+        }
+
+
+
+        /* =========================
+           MESSAGE
+        ========================== */
+
+        function showMessage(
+            message,
+            type = "success"
+        ) {
+
+            const element =
+                document.getElementById(
+                    "pageMessage"
+                );
+
+
+            element.textContent =
+                message;
+
+
+            element.className =
+                "page-message " + type;
+
+
+            setTimeout(() => {
+
+                element.textContent = "";
+
+                element.className =
+                    "page-message";
+
+            }, 3000);
+
+        }
+
+
+
+        /* =========================
+           OPEN FORM
+        ========================== */
+
+        async function openServiceForm() {
+
+            await loadCustomers();
+
+            await loadTechnicians();
+
+
+            document
+                .getElementById(
+                    "serviceFormSection"
+                )
+                .classList.remove("hidden");
+
+
+            document
+                .getElementById(
+                    "formTitle"
+                )
+                .textContent =
+                editingServiceId
+                    ? "Edit Service Request"
+                    : "New Service Request";
+
+
+            window.scrollTo({
+
+                top: 0,
+
+                behavior: "smooth"
+
+            });
+
+        }
+
+
+
+        /* =========================
+           CLOSE FORM
+        ========================== */
+
+        function closeServiceForm() {
+
+            document
+                .getElementById(
+                    "serviceFormSection"
+                )
+                .classList.add("hidden");
+
+
+            document
+                .getElementById(
+                    "serviceForm"
+                )
+                .reset();
+
+
+            editingServiceId = null;
+
+
+            document
+                .getElementById(
+                    "formTitle"
+                )
+                .textContent =
+                "New Service Request";
+
+        }
+
+
+
+        /* =========================
+           LOAD CUSTOMERS
+        ========================== */
+
+        async function loadCustomers() {
+
+            try {
+
+                const response =
+                    await fetch(
+                        CUSTOMER_API,
+                        {
+
+                            headers: {
+
+                                "Authorization":
+                                    `Bearer ${token}`
+
+                            }
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        "Failed to load customers"
+                    );
+
+                }
+
+
+                customers =
+                    data.customers || [];
+
+
+                const select =
+                    document.getElementById(
+                        "customerSelect"
+                    );
+
+
+                select.innerHTML = `
+
+                    <option value="">
+                        Select Customer
+                    </option>
+
+                `;
+
+
+                customers.forEach(
+                    customer => {
+
+                        const option =
+                            document.createElement(
+                                "option"
+                            );
+
+
+                        option.value =
+                            customer._id;
+
+
+                        option.textContent =
+                            `${customer.name} - ${customer.vehicleNumber}`;
+
+
+                        select.appendChild(
+                            option
+                        );
+
+                    }
+                );
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                showMessage(
+                    error.message,
+                    "error"
+                );
+
+            }
+
+        }
+
+
+
+        /* =========================
+           LOAD TECHNICIANS
+        ========================== */
+
+        async function loadTechnicians() {
+
+            try {
+
+                const response =
+                    await fetch(
+                        TECHNICIAN_API,
+                        {
+
+                            headers: {
+
+                                "Authorization":
+                                    `Bearer ${token}`
+
+                            }
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        "Failed to load technicians"
+                    );
+
+                }
+
+
+                technicians =
+                    data.technicians || [];
+
+
+                const select =
+                    document.getElementById(
+                        "technicianSelect"
+                    );
+
+
+                select.innerHTML = `
+
+                    <option value="">
+                        Not Assigned
+                    </option>
+
+                `;
+
+
+                technicians.forEach(
+                    technician => {
+
+                        const option =
+                            document.createElement(
+                                "option"
+                            );
+
+
+                        option.value =
+                            technician._id;
+
+
+                        option.textContent =
+                            `${technician.name} - ${technician.specialization} (${technician.status})`;
+
+
+                        select.appendChild(
+                            option
+                        );
+
+                    }
+                );
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                showMessage(
+                    error.message,
+                    "error"
+                );
+
+            }
+
+        }
+
+
+
+        /* =========================
+           LOAD SERVICE REQUESTS
+        ========================== */
+
+        async function loadServiceRequests() {
+
+            try {
+
+                const response =
+                    await fetch(
+                        API_URL,
+                        {
+
+                            headers: {
+
+                                "Authorization":
+                                    `Bearer ${token}`
+
+                            }
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        "Failed to load service requests"
+                    );
+
+                }
+
+
+                serviceRequests =
+                    data.serviceRequests || [];
+
+
+                displayServiceRequests(
+                    serviceRequests
+                );
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                document
+                    .getElementById(
+                        "serviceTableBody"
+                    )
+                    .innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="9"
+                            class="empty-table">
+
+                            Failed to load service requests.
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+
+                showMessage(
+                    error.message,
+                    "error"
+                );
+
+            }
+
+        }
+
+
+
+        /* =========================
+           DISPLAY SERVICE REQUESTS
+        ========================== */
+
+        function displayServiceRequests(
+            requestList
+        ) {
+
+            const tableBody =
+                document.getElementById(
+                    "serviceTableBody"
+                );
+
+
+            if (
+                requestList.length === 0
+            ) {
+
+                tableBody.innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="9"
+                            class="empty-table">
+
+                            No service requests found.
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+                return;
+
+            }
+
+
+            tableBody.innerHTML =
+                requestList.map(
+                    request => {
+
+
+                        const customerName =
+                            request.customer
+                                ? request.customer.name
+                                : "Unknown";
+
+
+                        const technicianName =
+                            request.technician
+                                ? request.technician.name
+                                : "Not Assigned";
+
+
+                        const serviceDate =
+                            request.serviceDate
+                                ? new Date(
+                                    request.serviceDate
+                                ).toLocaleDateString()
+                                : "-";
+
+
+                        return `
+
+                        <tr>
+
+                            <td>
+
+                                <strong>
+                                    ${escapeHtml(
+                                        customerName
+                                    )}
+                                </strong>
+
+                            </td>
+
+
+                            <td>
+                                ${escapeHtml(
+                                    request.vehicleNumber
+                                )}
+                            </td>
+
+
+                            <td>
+                                ${escapeHtml(
+                                    request.serviceType
+                                )}
+                            </td>
+
+
+                            <td>
+                                ${escapeHtml(
+                                    request.priority
+                                )}
+                            </td>
+
+
+                            <td>
+                                ${escapeHtml(
+                                    technicianName
+                                )}
+                            </td>
+
+
+                            <td>
+                                ${escapeHtml(
+                                    request.status
+                                )}
+                            </td>
+
+
+                            <td>
+                                ${serviceDate}
+                            </td>
+
+
+                            <td>
+                                ₹${Number(
+                                    request.estimatedCost || 0
+                                ).toFixed(2)}
+                            </td>
+
+
+                            <td>
+
+                                <div class="table-actions">
+
+                                    <button
+                                        class="edit-button"
+                                        onclick="editServiceRequest(
+                                            '${request._id}'
+                                        )">
+
+                                        Edit
+
+                                    </button>
+
+
+                                    <button
+                                        class="delete-button"
+                                        onclick="deleteServiceRequest(
+                                            '${request._id}'
+                                        )">
+
+                                        Delete
+
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                    }
+                ).join("");
+
+        }
+
+
+
+        /* =========================
+           FORM SUBMIT
+        ========================== */
+
+        document
+            .getElementById("serviceForm")
+            .addEventListener(
+                "submit",
+                async function (event) {
+
+                    event.preventDefault();
+
+
+                    const customer =
+                        document
+                            .getElementById(
+                                "customerSelect"
+                            )
+                            .value;
+
+
+                    const technician =
+                        document
+                            .getElementById(
+                                "technicianSelect"
+                            )
+                            .value;
+
+
+                    const serviceData = {
+
+                        customer:
+                            customer,
+
+                        vehicleNumber:
+                            document
+                                .getElementById(
+                                    "vehicleNumber"
+                                )
+                                .value
+                                .trim(),
+
+                        serviceType:
+                            document
+                                .getElementById(
+                                    "serviceType"
+                                )
+                                .value,
+
+                        problemDescription:
+                            document
+                                .getElementById(
+                                    "problemDescription"
+                                )
+                                .value
+                                .trim(),
+
+                        priority:
+                            document
+                                .getElementById(
+                                    "priority"
+                                )
+                                .value,
+
+                        technician:
+                            technician || null,
+
+                        status:
+                            document
+                                .getElementById(
+                                    "serviceStatus"
+                                )
+                                .value,
+
+                        serviceDate:
+                            document
+                                .getElementById(
+                                    "serviceDate"
+                                )
+                                .value,
+
+                        estimatedCost:
+                            Number(
+                                document
+                                    .getElementById(
+                                        "estimatedCost"
+                                    )
+                                    .value || 0
+                            ),
+
+                        notes:
+                            document
+                                .getElementById(
+                                    "notes"
+                                )
+                                .value
+                                .trim()
+
+                    };
+
+
+                    try {
+
+                        const url =
+                            editingServiceId
+                                ? `${API_URL}/${editingServiceId}`
+                                : API_URL;
+
+
+                        const method =
+                            editingServiceId
+                                ? "PUT"
+                                : "POST";
+
+
+                        const response =
+                            await fetch(
+                                url,
+                                {
+
+                                    method: method,
+
+                                    headers: {
+
+                                        "Content-Type":
+                                            "application/json",
+
+                                        "Authorization":
+                                            `Bearer ${token}`
+
+                                    },
+
+                                    body:
+                                        JSON.stringify(
+                                            serviceData
+                                        )
+
+                                }
+                            );
+
+
+                        const data =
+                            await response.json();
+
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                data.message ||
+                                "Operation failed"
+                            );
+
+                        }
+
+
+                        showMessage(
+                            editingServiceId
+                                ? "Service request updated successfully"
+                                : "Service request created successfully",
+                            "success"
+                        );
+
+
+                        closeServiceForm();
+
+
+                        loadServiceRequests();
+
+
+                    } catch (error) {
+
+                        console.error(error);
+
+                        showMessage(
+                            error.message,
+                            "error"
+                        );
+
+                    }
+
+                }
+            );
+
+
+
+        /* =========================
+           EDIT SERVICE REQUEST
+        ========================== */
+
+        async function editServiceRequest(id) {
+
+            const request =
+                serviceRequests.find(
+                    item => item._id === id
+                );
+
+
+            if (!request) {
+
+                showMessage(
+                    "Service request not found",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            editingServiceId =
+                request._id;
+
+
+            await openServiceForm();
+
+
+            document
+                .getElementById(
+                    "customerSelect"
+                )
+                .value =
+                request.customer
+                    ? request.customer._id
+                    : "";
+
+
+            document
+                .getElementById(
+                    "vehicleNumber"
+                )
+                .value =
+                request.vehicleNumber;
+
+
+            document
+                .getElementById(
+                    "serviceType"
+                )
+                .value =
+                request.serviceType;
+
+
+            document
+                .getElementById(
+                    "problemDescription"
+                )
+                .value =
+                request.problemDescription;
+
+
+            document
+                .getElementById(
+                    "priority"
+                )
+                .value =
+                request.priority;
+
+
+            document
+                .getElementById(
+                    "technicianSelect"
+                )
+                .value =
+                request.technician
+                    ? request.technician._id
+                    : "";
+
+
+            document
+                .getElementById(
+                    "serviceStatus"
+                )
+                .value =
+                request.status;
+
+
+            document
+                .getElementById(
+                    "serviceDate"
+                )
+                .value =
+                request.serviceDate
+                    ? request.serviceDate.substring(
+                        0,
+                        10
+                    )
+                    : "";
+
+
+            document
+                .getElementById(
+                    "estimatedCost"
+                )
+                .value =
+                request.estimatedCost || 0;
+
+
+            document
+                .getElementById(
+                    "notes"
+                )
+                .value =
+                request.notes || "";
+
+
+            document
+                .getElementById(
+                    "formTitle"
+                )
+                .textContent =
+                "Edit Service Request";
+
+        }
+
+
+
+        /* =========================
+           DELETE SERVICE REQUEST
+        ========================== */
+
+        async function deleteServiceRequest(
+            id
+        ) {
+
+            const request =
+                serviceRequests.find(
+                    item => item._id === id
+                );
+
+
+            if (!request) {
+
+                return;
+
+            }
+
+
+            const confirmed =
+                confirm(
+                    "Are you sure you want to delete this service request?"
+                );
+
+
+            if (!confirmed) {
+
+                return;
+
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}/${id}`,
+                        {
+
+                            method: "DELETE",
+
+                            headers: {
+
+                                "Authorization":
+                                    `Bearer ${token}`
+
+                            }
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        "Failed to delete service request"
+                    );
+
+                }
+
+
+                showMessage(
+                    "Service request deleted successfully",
+                    "success"
+                );
+
+
+                loadServiceRequests();
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                showMessage(
+                    error.message,
+                    "error"
+                );
+
+            }
+
+        }
+
+
+
+        /* =========================
+           SEARCH
+        ========================== */
+
+        document
+            .getElementById(
+                "searchService"
+            )
+            .addEventListener(
+                "input",
+                function () {
+
+
+                    const searchText =
+                        this.value
+                            .toLowerCase()
+                            .trim();
+
+
+                    const filtered =
+                        serviceRequests.filter(
+                            request => {
+
+
+                                const customerName =
+                                    request.customer
+                                        ? request.customer.name
+                                        : "";
+
+
+                                const technicianName =
+                                    request.technician
+                                        ? request.technician.name
+                                        : "";
+
+
+                                return (
+
+                                    customerName
+                                        .toLowerCase()
+                                        .includes(
+                                            searchText
+                                        )
+
+                                    ||
+
+                                    technicianName
+                                        .toLowerCase()
+                                        .includes(
+                                            searchText
+                                        )
+
+                                    ||
+
+                                    request.vehicleNumber
+                                        .toLowerCase()
+                                        .includes(
+                                            searchText
+                                        )
+
+                                    ||
+
+                                    request.serviceType
+                                        .toLowerCase()
+                                        .includes(
+                                            searchText
+                                        )
+
+                                    ||
+
+                                    request.status
+                                        .toLowerCase()
+                                        .includes(
+                                            searchText
+                                        )
+
+                                    ||
+
+                                    request.priority
+                                        .toLowerCase()
+                                        .includes(
+                                            searchText
+                                        )
+
+                                );
+
+                            }
+                        );
+
+
+                    displayServiceRequests(
+                        filtered
+                    );
+
+                }
+            );
+
+
+
+        /* =========================
+           ESCAPE HTML
+        ========================== */
+
+        function escapeHtml(value) {
+
+            return String(value)
+                .replace(
+                    /[&<>"']/g,
+                    function (character) {
+
+                        const entities = {
+
+                            "&": "&amp;",
+                            "<": "&lt;",
+                            ">": "&gt;",
+                            '"': "&quot;",
+                            "'": "&#039;"
+
+                        };
+
+
+                        return entities[
+                            character
+                        ];
+
+                    }
+                );
+
+        }
+
+
+
+        /* =========================
+           LOGOUT
+        ========================== */
+
+        function logout() {
+
+            localStorage.removeItem(
+                "token"
+            );
+
+            localStorage.removeItem(
+                "user"
+            );
+
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+
+        /* =========================
+           INITIAL LOAD
+        ========================== */
+
+        loadServiceRequests();
+
+    </script>
+
+
+</body>
+
+</html>

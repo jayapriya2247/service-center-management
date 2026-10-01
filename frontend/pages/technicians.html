@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Technicians - Service Center Management</title>
+
+    <link rel="stylesheet"
+        href="../css/style.css">
+</head>
+
+<body class="dashboard-page">
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            Service<span>Center</span>
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="dashboard.html">
+                <span>🏠</span>
+                Dashboard
+            </a>
+
+            <a href="customers.html">
+                <span>👥</span>
+                Customers
+            </a>
+
+            <a href="technicians.html"
+                class="active">
+                <span>🔧</span>
+                Technicians
+            </a>
+
+            <a href="service-requests.html">
+                <span>📋</span>
+                Service Requests
+            </a>
+
+            <a href="billing.html">
+                <span>💳</span>
+                Billing
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <button
+                class="logout-button"
+                onclick="logout()">
+                Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="dashboard-main">
+
+        <!-- Header -->
+
+        <header class="dashboard-header">
+
+            <div>
+
+                <p class="dashboard-label">
+                    SERVICE CENTER MANAGEMENT
+                </p>
+
+                <h1>
+                    Technicians
+                </h1>
+
+            </div>
+
+
+            <div class="user-info">
+
+                <div class="user-avatar">
+                    👤
+                </div>
+
+                <div>
+
+                    <strong id="userName">
+                        User
+                    </strong>
+
+                    <span id="userRole">
+                        Customer
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =========================
+             PAGE INTRO
+        ========================== -->
+
+        <section class="page-intro">
+
+            <div>
+
+                <p class="dashboard-label">
+                    TECHNICIAN MANAGEMENT
+                </p>
+
+                <h2>
+                    Manage Technicians
+                </h2>
+
+                <p>
+                    Add, update, search and manage service technicians.
+                </p>
+
+            </div>
+
+
+            <button
+                class="primary-action-button"
+                onclick="openTechnicianForm()">
+
+                + Add Technician
+
+            </button>
+
+        </section>
+
+
+        <!-- Message -->
+
+        <div
+            id="pageMessage"
+            class="page-message">
+        </div>
+
+
+        <!-- =========================
+             TECHNICIAN FORM
+        ========================== -->
+
+        <section
+            id="technicianFormSection"
+            class="data-form-section hidden">
+
+            <div class="form-section-header">
+
+                <div>
+
+                    <h2 id="formTitle">
+                        Add Technician
+                    </h2>
+
+                    <p>
+                        Enter technician information below.
+                    </p>
+
+                </div>
+
+                <button
+                    class="close-button"
+                    onclick="closeTechnicianForm()">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+            <form id="technicianForm">
+
+                <div class="form-grid">
+
+                    <!-- Name -->
+
+                    <div class="form-group">
+
+                        <label for="technicianName">
+                            Technician Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="technicianName"
+                            placeholder="Enter technician name"
+                            required>
+
+                    </div>
+
+
+                    <!-- Phone -->
+
+                    <div class="form-group">
+
+                        <label for="technicianPhone">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="text"
+                            id="technicianPhone"
+                            placeholder="Enter phone number"
+                            required>
+
+                    </div>
+
+
+                    <!-- Email -->
+
+                    <div class="form-group">
+
+                        <label for="technicianEmail">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="technicianEmail"
+                            placeholder="Enter email"
+                            required>
+
+                    </div>
+
+
+                    <!-- Specialization -->
+
+                    <div class="form-group">
+
+                        <label for="specialization">
+                            Specialization
+                        </label>
+
+                        <input
+                            type="text"
+                            id="specialization"
+                            placeholder="Example: Engine Repair"
+                            required>
+
+                    </div>
+
+
+                    <!-- Experience -->
+
+                    <div class="form-group">
+
+                        <label for="experience">
+                            Experience (Years)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="experience"
+                            min="0"
+                            placeholder="Enter experience"
+                            required>
+
+                    </div>
+
+
+                    <!-- Status -->
+
+                    <div class="form-group">
+
+                        <label for="technicianStatus">
+                            Status
+                        </label>
+
+                        <select
+                            id="technicianStatus">
+
+                            <option value="Available">
+                                Available
+                            </option>
+
+                            <option value="Busy">
+                                Busy
+                            </option>
+
+                            <option value="On Leave">
+                                On Leave
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Buttons -->
+
+                <div class="form-actions">
+
+                    <button
+                        type="submit"
+                        class="auth-button">
+
+                        Save Technician
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="secondary-action-button"
+                        onclick="closeTechnicianForm()">
+
+                        Cancel
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- =========================
+             TECHNICIAN TABLE
+        ========================== -->
+
+        <section class="table-section">
+
+            <div class="table-header">
+
+                <div>
+
+                    <h2>
+                        Technician List
+                    </h2>
+
+                    <p>
+                        View and manage registered technicians.
+                    </p>
+
+                </div>
+
+
+                <input
+                    type="text"
+                    id="searchTechnician"
+                    class="search-input"
+                    placeholder="Search technician...">
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Name
+                            </th>
+
+                            <th>
+                                Phone
+                            </th>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Specialization
+                            </th>
+
+                            <th>
+                                Experience
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="technicianTableBody">
+
+                        <tr>
+
+                            <td
+                                colspan="7"
+                                class="empty-table">
+
+                                Loading technicians...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        const API_URL =
+            "http://localhost:5000/api/technicians";
+
+
+        let technicians = [];
+
+        let editingTechnicianId = null;
+
+
+        /* =========================
+           AUTH CHECK
+        ========================== */
+
+        const token =
+            localStorage.getItem("token");
+
+        if (!token) {
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+        /* =========================
+           USER INFORMATION
+        ========================== */
+
+        const storedUser =
+            localStorage.getItem("user");
+
+        if (storedUser) {
+
+            const user =
+                JSON.parse(storedUser);
+
+            document.getElementById("userName")
+                .textContent =
+                user.name || "User";
+
+            document.getElementById("userRole")
+                .textContent =
+                user.role || "Customer";
+
+        }
+
+
+        /* =========================
+           OPEN FORM
+        ========================== */
+
+        function openTechnicianForm() {
+
+            document
+                .getElementById("technicianFormSection")
+                .classList.remove("hidden");
+
+            document
+                .getElementById("formTitle")
+                .textContent =
+                editingTechnicianId
+                    ? "Edit Technician"
+                    : "Add Technician";
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        /* =========================
+           CLOSE FORM
+        ========================== */
+
+        function closeTechnicianForm() {
+
+            document
+                .getElementById("technicianFormSection")
+                .classList.add("hidden");
+
+            document
+                .getElementById("technicianForm")
+                .reset();
+
+            editingTechnicianId = null;
+
+            document
+                .getElementById("formTitle")
+                .textContent =
+                "Add Technician";
+
+        }
+
+
+        /* =========================
+           MESSAGE
+        ========================== */
+
+        function showMessage(
+            message,
+            type = "success"
+        ) {
+
+            const messageElement =
+                document.getElementById(
+                    "pageMessage"
+                );
+
+            messageElement.textContent =
+                message;
+
+            messageElement.className =
+                "page-message " + type;
+
+            setTimeout(() => {
+
+                messageElement.textContent =
+                    "";
+
+                messageElement.className =
+                    "page-message";
+
+            }, 3000);
+
+        }
+
+
+        /* =========================
+           LOAD TECHNICIANS
+        ========================== */
+
+        async function loadTechnicians() {
+
+            try {
+
+                const response =
+                    await fetch(API_URL, {
+
+                        method: "GET",
+
+                        headers: {
+                            "Authorization":
+                                `Bearer ${token}`
+                        }
+
+                    });
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        "Failed to load technicians"
+                    );
+
+                }
+
+
+                technicians =
+                    data.technicians || [];
+
+
+                displayTechnicians(
+                    technicians
+                );
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                document.getElementById(
+                    "technicianTableBody"
+                ).innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="7"
+                            class="empty-table">
+
+                            Failed to load technicians.
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+                showMessage(
+                    error.message,
+                    "error"
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           DISPLAY TECHNICIANS
+        ========================== */
+
+        function displayTechnicians(
+            technicianList
+        ) {
+
+            const tableBody =
+                document.getElementById(
+                    "technicianTableBody"
+                );
+
+
+            if (
+                technicianList.length === 0
+            ) {
+
+                tableBody.innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="7"
+                            class="empty-table">
+
+                            No technicians found.
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+                return;
+
+            }
+
+
+            tableBody.innerHTML =
+                technicianList.map(
+                    technician => `
+
+                    <tr>
+
+                        <td>
+                            <strong>
+                                ${escapeHtml(
+                                    technician.name
+                                )}
+                            </strong>
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                technician.phone
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                technician.email
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                technician.specialization
+                            )}
+                        </td>
+
+                        <td>
+                            ${technician.experience}
+                            year(s)
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                technician.status
+                            )}
+                        </td>
+
+                        <td>
+
+                            <div class="table-actions">
+
+                                <button
+                                    class="edit-button"
+                                    onclick="editTechnician(
+                                        '${technician._id}'
+                                    )">
+
+                                    Edit
+
+                                </button>
+
+                                <button
+                                    class="delete-button"
+                                    onclick="deleteTechnician(
+                                        '${technician._id}'
+                                    )">
+
+                                    Delete
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                `
+                ).join("");
+
+        }
+
+
+        /* =========================
+           FORM SUBMIT
+        ========================== */
+
+        document
+            .getElementById("technicianForm")
+            .addEventListener(
+                "submit",
+                async function (event) {
+
+                    event.preventDefault();
+
+
+                    const technicianData = {
+
+                        name:
+                            document
+                                .getElementById(
+                                    "technicianName"
+                                )
+                                .value
+                                .trim(),
+
+                        phone:
+                            document
+                                .getElementById(
+                                    "technicianPhone"
+                                )
+                                .value
+                                .trim(),
+
+                        email:
+                            document
+                                .getElementById(
+                                    "technicianEmail"
+                                )
+                                .value
+                                .trim(),
+
+                        specialization:
+                            document
+                                .getElementById(
+                                    "specialization"
+                                )
+                                .value
+                                .trim(),
+
+                        experience:
+                            Number(
+                                document
+                                    .getElementById(
+                                        "experience"
+                                    )
+                                    .value
+                            ),
+
+                        status:
+                            document
+                                .getElementById(
+                                    "technicianStatus"
+                                )
+                                .value
+
+                    };
+
+
+                    try {
+
+                        const url =
+                            editingTechnicianId
+                                ? `${API_URL}/${editingTechnicianId}`
+                                : API_URL;
+
+
+                        const method =
+                            editingTechnicianId
+                                ? "PUT"
+                                : "POST";
+
+
+                        const response =
+                            await fetch(url, {
+
+                                method: method,
+
+                                headers: {
+
+                                    "Content-Type":
+                                        "application/json",
+
+                                    "Authorization":
+                                        `Bearer ${token}`
+
+                                },
+
+                                body:
+                                    JSON.stringify(
+                                        technicianData
+                                    )
+
+                            });
+
+
+                        const data =
+                            await response.json();
+
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                data.message ||
+                                "Operation failed"
+                            );
+
+                        }
+
+
+                        showMessage(
+                            editingTechnicianId
+                                ? "Technician updated successfully"
+                                : "Technician created successfully",
+                            "success"
+                        );
+
+
+                        closeTechnicianForm();
+
+
+                        loadTechnicians();
+
+
+                    } catch (error) {
+
+                        console.error(error);
+
+                        showMessage(
+                            error.message,
+                            "error"
+                        );
+
+                    }
+
+                }
+            );
+
+
+        /* =========================
+           EDIT TECHNICIAN
+        ========================== */
+
+        function editTechnician(id) {
+
+            const technician =
+                technicians.find(
+                    item => item._id === id
+                );
+
+
+            if (!technician) {
+
+                showMessage(
+                    "Technician not found",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            editingTechnicianId =
+                technician._id;
+
+
+            document
+                .getElementById(
+                    "technicianName"
+                )
+                .value =
+                technician.name;
+
+
+            document
+                .getElementById(
+                    "technicianPhone"
+                )
+                .value =
+                technician.phone;
+
+
+            document
+                .getElementById(
+                    "technicianEmail"
+                )
+                .value =
+                technician.email;
+
+
+            document
+                .getElementById(
+                    "specialization"
+                )
+                .value =
+                technician.specialization;
+
+
+            document
+                .getElementById(
+                    "experience"
+                )
+                .value =
+                technician.experience;
+
+
+            document
+                .getElementById(
+                    "technicianStatus"
+                )
+                .value =
+                technician.status;
+
+
+            document
+                .getElementById(
+                    "formTitle"
+                )
+                .textContent =
+                "Edit Technician";
+
+
+            openTechnicianForm();
+
+        }
+
+
+        /* =========================
+           DELETE TECHNICIAN
+        ========================== */
+
+        async function deleteTechnician(id) {
+
+            const technician =
+                technicians.find(
+                    item => item._id === id
+                );
+
+
+            if (!technician) {
+
+                return;
+
+            }
+
+
+            const confirmed =
+                confirm(
+                    `Are you sure you want to delete ${technician.name}?`
+                );
+
+
+            if (!confirmed) {
+
+                return;
+
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}/${id}`,
+                        {
+
+                            method: "DELETE",
+
+                            headers: {
+
+                                "Authorization":
+                                    `Bearer ${token}`
+
+                            }
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        "Failed to delete technician"
+                    );
+
+                }
+
+
+                showMessage(
+                    "Technician deleted successfully",
+                    "success"
+                );
+
+
+                loadTechnicians();
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                showMessage(
+                    error.message,
+                    "error"
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           SEARCH
+        ========================== */
+
+        document
+            .getElementById(
+                "searchTechnician"
+            )
+            .addEventListener(
+                "input",
+                function () {
+
+                    const searchText =
+                        this.value
+                            .toLowerCase()
+                            .trim();
+
+
+                    const filtered =
+                        technicians.filter(
+                            technician =>
+
+                                technician.name
+                                    .toLowerCase()
+                                    .includes(
+                                        searchText
+                                    )
+
+                                ||
+
+                                technician.phone
+                                    .toLowerCase()
+                                    .includes(
+                                        searchText
+                                    )
+
+                                ||
+
+                                technician.email
+                                    .toLowerCase()
+                                    .includes(
+                                        searchText
+                                    )
+
+                                ||
+
+                                technician.specialization
+                                    .toLowerCase()
+                                    .includes(
+                                        searchText
+                                    )
+
+                                ||
+
+                                technician.status
+                                    .toLowerCase()
+                                    .includes(
+                                        searchText
+                                    )
+
+                        );
+
+
+                    displayTechnicians(
+                        filtered
+                    );
+
+                }
+            );
+
+
+        /* =========================
+           ESCAPE HTML
+        ========================== */
+
+        function escapeHtml(value) {
+
+            return String(value)
+                .replace(
+                    /[&<>"']/g,
+                    function (character) {
+
+                        const entities = {
+
+                            "&": "&amp;",
+                            "<": "&lt;",
+                            ">": "&gt;",
+                            '"': "&quot;",
+                            "'": "&#039;"
+
+                        };
+
+                        return entities[
+                            character
+                        ];
+
+                    }
+                );
+
+        }
+
+
+        /* =========================
+           LOGOUT
+        ========================== */
+
+        function logout() {
+
+            localStorage.removeItem(
+                "token"
+            );
+
+            localStorage.removeItem(
+                "user"
+            );
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+        /* =========================
+           INITIAL LOAD
+        ========================== */
+
+        loadTechnicians();
+
+    </script>
+
+</body>
+
+</html>
